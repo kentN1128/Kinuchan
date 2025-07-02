@@ -11,18 +11,22 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import environ
+# import environ
 from django.contrib import messages
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-env = environ.Env()
-root = environ.Path(BASE_DIR/'secrets')
+# env = environ.Env()
+# root = environ.Path(BASE_DIR/'secrets')
 
 # honban
-env.read_env(root('.env.prod'))
+# env.read_env(root('.env.prod'))
 
 # # kaihatsu
 # env.read_env(root('.env.dev'))
@@ -32,11 +36,11 @@ env.read_env(root('.env.prod'))
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY') 
+SECRET_KEY = os.getenv('SECRET_KEY') 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG')  # 変更
+DEBUG = os.getenv('DEBUG')  # 変更
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')  # 変更
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS')  # 変更
 
 
 # Application definition

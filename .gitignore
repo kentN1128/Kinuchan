@@ -1,6 +1,7 @@
 #dirs
 __pycache__/
 venv/
+static/images
 static/items
 
 #files
