@@ -1,0 +1,17 @@
+<a href="/items/{{object.pk}}/" class="text-decoration-none text-dark">
+  <div class="border">
+     <div class="position-relative">
+      <img src="/{{ object.image }}" width="100%">
+      {% if object.stock == 0 %}
+        <div class="overlay d-flex justify-content-center align-items-center">
+          <span class="sold-out-label">SOLD OUT</span>
+        </div>
+      {% endif %}
+    </div>
+    <div class="bg-light text-center text-secondary overflow-hidden">
+      <div class="my-2 py-2">
+        <h2 class="lead">{{object.name}} - ¥{{object.price}}（税別）</h2>
+      </div>
+    </div>
+  </div>
+</a>

@@ -1,0 +1,45 @@
+
+{% load static %}
+{% comment %} <div class="position-relative overflow-hidden p-3 p-md-5 text-center bg-light"> {% endcomment %}
+<div id="carouselExampleDark" class="carousel carousel-dark slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="10000">
+      <img src="static/images/IMG1.png" class="d-block w-100" alt="IMG1" style="height: 400px; object-fit: cover;">
+      <div class="carousel-caption d-none d-md-block">
+        <h2 style="color: white;">{{ TITLE }}</h2>
+        <h4 style="color: white;">光と色で綴る、人生の物語。</h5>
+        <h5 style="color: white;">— 長崎の小さな工房から、世界に一つのステンドグラスを —</h5>
+      </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src="static/images/IMG2.jpeg" class="d-block w-100" alt="IMG1" style="height: 400px; object-fit: cover;">
+      <div class="carousel-caption d-none d-md-block" style="color: white; background-color: rgba(0,0,0,0.4); padding: 5px; border-radius: 5px;">
+        <h2 style="color: white;">{{ TITLE }}</h2>
+        <h4 style="color: white;">静かな情熱を、光に込めて。</h5>
+        <h5 style="color: white;">—長崎の丘の上から届ける、ステンドグラスの贈り物 —</h5>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="static/images/IMG3.jpeg" class="d-block w-100" alt="IMG1" style="height: 400px; object-fit: cover;">
+      <div class="carousel-caption d-none d-md-block">
+        <h2 style="color: white;">{{ TITLE }}</h2>
+        <h4 style="color: white;">ガラスに宿る、やさしい時間。</h5>
+        <h5 style="color: white;">— 69歳の手仕事が生む、温かな光のアート —</h5>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+{% comment %} </div> {% endcomment %}

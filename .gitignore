@@ -1,0 +1,10 @@
+#dirs
+__pycache__/
+venv/
+static/images
+static/items
+
+#files
+db.sqlite
+.env.dev
+.env.prod

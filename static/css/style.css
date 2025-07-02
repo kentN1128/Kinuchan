@@ -1,0 +1,44 @@
+.item-box {
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);  /* カーテン風 */
+  backdrop-filter: blur(2px);           /* 背景ぼかし（モダンブラウザ） */
+  z-index: 2;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: bold;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.section-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* JS不要版：ページ表示時に自動でアニメ */
+@keyframes slidein {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slidein {
+  animation: slidein 1s ease-out forwards;
+}
