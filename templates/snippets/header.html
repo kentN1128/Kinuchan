@@ -1,29 +1,42 @@
-<div class="py-1 bg-dark fixed-top ">
-  <nav class="container d-flex flex-column flex-md-row justify-content-between">
-    <a class="py-2 text-white text-decoration-none" href="/">
-      <i class="bi bi-house-door align-middle me-1"></i>Home</a>
-    <a class="py-2 d-none d-md-inline-block text-white text-decoration-none" href="/orders/">
-      <i class="bi bi-box-seam align-middle me-1"></i>Orders</a>
-    <a class="py-2 d-none d-md-inline-block text-white text-decoration-none" href="/profile/">
-      <i class="bi bi-person-circle align-middle me-1"></i>Profile</a>
-    <a class="py-2 d-none d-md-inline-block text-white text-decoration-none" href="/account/">
-      <i class="bi bi-gear align-middle me-1"></i>Account</a>
-    <a class="py-2 d-none d-md-inline-block text-white text-decoration-none" href="/contact/">
-      <i class="bi bi-envelope align-middle me-1"></i>Contact</a>
-    <a class="py-2 d-none d-md-inline-block text-white text-decoration-none" href="/cart/">
-      <i class="bi bi-cart align-middle me-1" style="font-size: 1.2rem;"></i>Cart
-      {% if request.session.cart and request.session.cart.items|length != 0 %}
-      <span class="badge bg-danger">{{request.session.cart.items|length}}</span>
-      {% endif %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <i class="bi bi-house-door me-1"></i>Home
     </a>
-    {% if user.is_authenticated %}
-    <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-    <button type="submit"class="py-2 d-none d-md-inline-block text-white btn btn-primary text-decoration-none">Logout</button>
-    </form>
-    {% else %}
-    <a class="py-2 d-none d-md-inline-block text-white text-decoration-none" href="/login/ ">Login</a>
-    <a class="py-2 d-none d-md-inline-block text-white text-decoration-none" href="/signup/">SignUp</a>
-    {% endif %}
-  </nav>
-</div>
+
+    <!-- ハンバーガーボタン -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+      aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- メニュー本体 -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link text-white" href="/orders/"><i class="bi bi-box-seam me-1"></i>Orders</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="/profile/"><i class="bi bi-person-circle me-1"></i>Profile</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="/account/"><i class="bi bi-gear me-1"></i>Account</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="/contact/"><i class="bi bi-envelope me-1"></i>Contact</a></li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/cart/">
+            <i class="bi bi-cart me-1" style="font-size: 1.2rem;"></i>Cart
+            {% if request.session.cart and request.session.cart.items|length != 0 %}
+              <span class="badge bg-danger">{{ request.session.cart.items|length }}</span>
+            {% endif %}
+          </a>
+        </li>
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <form action="{% url 'logout' %}" method="post" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-light nav-link border-0">Logout</button>
+            </form>
+          </li>
+        {% else %}
+          <li class="nav-item"><a class="nav-link text-white" href="/login/">Login</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/signup/">SignUp</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
