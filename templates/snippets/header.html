@@ -12,7 +12,7 @@
 
     <!-- メニュー本体 -->
     <div class="collapse navbar-collapse" id="navbarContent">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav me-auto">
         <li class="nav-item"><a class="nav-link text-white" href="/orders/"><i class="bi bi-box-seam me-1"></i>Orders</a></li>
         <li class="nav-item"><a class="nav-link text-white" href="/profile/"><i class="bi bi-person-circle me-1"></i>Profile</a></li>
         <li class="nav-item"><a class="nav-link text-white" href="/account/"><i class="bi bi-gear me-1"></i>Account</a></li>
@@ -28,9 +28,11 @@
         {% if user.is_authenticated %}
           <li class="nav-item">
             <form action="{% url 'logout' %}" method="post" class="d-inline">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-outline-light nav-link border-0">Logout</button>
-            </form>
+            {% csrf_token %}
+            <button type="submit" class="nav-link btn btn-link text-white px-3" style="text-decoration: none;">
+              Logout
+            </button>
+  </form>
           </li>
         {% else %}
           <li class="nav-item"><a class="nav-link text-white" href="/login/">Login</a></li>
