@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.crypto import get_random_string
+from .utils import upload_image_to
 # import os
  
  
@@ -8,7 +9,6 @@ def create_id():
  
  
 def upload_image_to(instance, filename):
-    # MEDIA_ROOT/items/<item_id>/<filename>
     return f'items/{instance.id}/{filename}'
 
 
