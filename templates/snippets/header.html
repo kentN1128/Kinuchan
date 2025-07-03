@@ -18,11 +18,12 @@
         <li class="nav-item"><a class="nav-link text-white" href="/account/"><i class="bi bi-gear me-1"></i>Account</a></li>
         <li class="nav-item"><a class="nav-link text-white" href="/contact/"><i class="bi bi-envelope me-1"></i>Contact</a></li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="/cart/">
-            <i class="bi bi-cart me-1" style="font-size: 1.2rem;"></i>Cart
-            {% if request.session.cart and request.session.cart.items|length != 0 %}
-              <span class="badge bg-danger">{{ request.session.cart.items|length }}</span>
-            {% endif %}
+          <a class="nav-link text-white d-flex align-items-center gap-1" href="/cart/">
+           <i class="bi bi-cart" style="font-size: 1.2rem;"></i>
+          <span>Cart</span>
+          {% if request.session.cart and request.session.cart.items|length != 0 %}
+           <span class="badge bg-danger">{{ request.session.cart.items|length }}</span>
+           {% endif %}
           </a>
         </li>
         {% if user.is_authenticated %}
