@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.crypto import get_random_string
-import os
+# import os
  
  
 def create_id():
@@ -8,8 +8,9 @@ def create_id():
  
  
 def upload_image_to(instance, filename):
-    item_id = instance.id
-    return os.path.join('static', 'items', item_id, filename)
+    # MEDIA_ROOT/items/<item_id>/<filename>
+    return f'items/{instance.id}/{filename}'
+
 
 class Tag(models.Model):
     slug = models.CharField(max_length=32, primary_key=True)
@@ -37,8 +38,7 @@ class Item(models.Model):
     is_published = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    image = models.ImageField(default="", blank=True,
-                              upload_to=upload_image_to)
+    image = models.ImageField(upload_to=upload_image_to, blank=True, null=True)
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True)
     tags = models.ManyToManyField(Tag)
