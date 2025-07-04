@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.crypto import get_random_string
-from .utils import upload_image_to
+# from .utils import upload_image_to
 # import os
  
  
