@@ -1,7 +1,7 @@
 <a href="/items/{{object.pk}}/" class="text-decoration-none text-dark">
   <div class="border">
      <div class="position-relative">
-      <img src="/{{ object.image.url }}" width="100%">
+      <img src="{{ object.image.url }}" width="100%">
       {% if object.stock == 0 %}
         <div class="overlay d-flex justify-content-center align-items-center">
           <span class="sold-out-label">SOLD OUT</span>
