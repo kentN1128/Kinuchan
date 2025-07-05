@@ -63,6 +63,6 @@
 }
 
 .badge {
-  display: inline-block;
-  margin-bottom: 12px;  /* 強制的に余白追加 */
+  font-weight: bold;
 }
+

@@ -12,11 +12,11 @@
   <div class="row">
     {% for object in POPULAR_ITEMS %}
       {% if forloop.counter <= 3 %}
-      <div class="col-12 col-sm-6 col-md-4 col-lg-4 mb-4 d-flex">
-  <div class="w-100">
+     <div class="col-12 col-sm-6 col-md-4 col-lg-4 mb-4 d-flex">
+  <div class="w-100 position-relative">
 
-    <!-- ★ 人気バッジ表示（画像にかぶらないように margin-bottom をしっかり） -->
-    <div class="text-center mb-3">
+    <!-- ★ バッジを画像の上に重ねて表示 -->
+    <div class="position-absolute top-0 start-0 mt-2 ms-2" style="z-index: 10;">
       <span class="badge bg-danger rounded-pill px-3 py-2" style="font-size: 0.85rem;">
         {% if forloop.counter == 1 %}
           <i class="fa-solid fa-crown text-warning"></i>
@@ -29,9 +29,11 @@
       </span>
     </div>
 
+    <!-- 商品カード -->
     {% include 'snippets/item_box.html' %}
   </div>
 </div>
+
 
 
       {% endif %}
