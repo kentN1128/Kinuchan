@@ -12,7 +12,7 @@
     <div class="row">
       {% for object in POPULAR_ITEMS %}
         {% if forloop.counter <= 3 %}
-        <div class="col-4 col-lg-4 my-3">
+        <div class="col-6 col-lg-4 my-3">
           <button type="button" class="badge bg-danger rounded-pill mb-2">
             {% if forloop.counter == 1 %}
               <i class="fa-solid fa-crown text-warning"></i>
@@ -32,10 +32,9 @@
     <!-- 商品一覧 -->
     <div class="row justify-content-center mt-5">
       {% for object in items %}
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+        <div class="col-6 col-md-3">
           {% include 'snippets/item_box.html' %}
         </div>
-
       {% endfor %}
     </div>
   </div>
