@@ -52,3 +52,12 @@
 .text-orange {
   color: orange;
 }
+
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+.card img {
+  display: block;
+  margin: 0 auto;
+}

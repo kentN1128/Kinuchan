@@ -3,16 +3,17 @@
 {% block main %}
 {% include 'snippets/headline.html' %}
 
-  <div class="container px-5" style="max-width:100%">
+<div class="container px-5" style="max-width:100%">
 
-    <!-- ピックアップ -->
-    <div class="text-center my-5">
-      <h5 class="section-title animate-slidein mb-4 responsive-title">ピックアップ</h5>
-    </div>
-    <div class="row">
-      {% for object in POPULAR_ITEMS %}
-        {% if forloop.counter <= 3 %}
-        <div class="col-6 col-lg-4 my-3">
+  <!-- ピックアップ -->
+  <div class="text-center my-5">
+    <h5 class="section-title animate-slidein mb-4 responsive-title">ピックアップ</h5>
+  </div>
+  <div class="row">
+    {% for object in POPULAR_ITEMS %}
+      {% if forloop.counter <= 3 %}
+      <div class="col-12 col-sm-6 col-md-4 col-lg-4 mb-4 d-flex">
+        <div class="w-100">
           <button type="button" class="badge bg-danger rounded-pill mb-2">
             {% if forloop.counter == 1 %}
               <i class="fa-solid fa-crown text-warning"></i>
@@ -25,17 +26,19 @@
           </button>
           {% include 'snippets/item_box.html' %}
         </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-
-    <!-- 商品一覧 -->
-    <div class="row  mt-5">
-      {% for object in items %}
-        <div class="col-6 col-md-3">
-          {% include 'snippets/item_box.html' %}
-        </div>
-      {% endfor %}
-    </div>
+      </div>
+      {% endif %}
+    {% endfor %}
   </div>
+
+  <!-- 商品一覧 -->
+  <div class="row mt-5">
+    {% for object in items %}
+      <div class="col-6 col-md-4 col-lg-3 my-3 d-flex">
+        {% include 'snippets/item_box.html' %}
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
 {% endblock %}
