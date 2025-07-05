@@ -1,36 +1,41 @@
 {% extends 'base.html' %}
- 
-{% block main %}
- 
-{% include 'snippets/headline.html' %}
- 
-<div class="container px-5" style="max-width:100%">
-<div class="row my-5">
-  <h5 class="section-title animate-slidein text-center mb-4 responsive-title">ピックアップ</h5>
-  {% for object in POPULAR_ITEMS %}
-    {% if forloop.counter == 1 or forloop.counter == 2 or forloop.counter == 3 %}
-    <div class="col-4 col-lg-4 my-3">
-      <button type="button" class="badge bg-danger rounded-pill">
-        {% if forloop.counter == 1 %}<i class="fa-solid fa-crown text-warning"></i>
-        {% elif forloop.counter == 2 %}<i class="fa-solid fa-medal text-secondary"></i>
-        {% elif forloop.counter == 3 %}<i class="fa-solid fa-medal text-orange"></i>
-        {% endif %}
-        {{ forloop.counter }}番人気
-      </button>
-      {% include 'snippets/item_box.html' %}
-    </div>
-    {% endif %}
-    {% endfor %}
-    </div>
-  <div class="container">
-    <div class="row justify-content-center">
-    {% for object in items %}
-    <div class="col-6 col-md-3">
-      {% include 'snippets/item_box.html' %}
-    </div>
-    {% endfor %}
-  </div>
-</div>
-</div>
 
+{% block main %}
+  {% include 'snippets/headline.html' %}
+
+  <div class="container px-5" style="max-width:100%">
+
+    <!-- ピックアップ -->
+    <div class="text-center my-5">
+      <h5 class="section-title animate-slidein mb-4 responsive-title">ピックアップ</h5>
+    </div>
+    <div class="row">
+      {% for object in POPULAR_ITEMS %}
+        {% if forloop.counter <= 3 %}
+        <div class="col-4 col-lg-4 my-3">
+          <button type="button" class="badge bg-danger rounded-pill mb-2">
+            {% if forloop.counter == 1 %}
+              <i class="fa-solid fa-crown text-warning"></i>
+            {% elif forloop.counter == 2 %}
+              <i class="fa-solid fa-medal text-secondary"></i>
+            {% elif forloop.counter == 3 %}
+              <i class="fa-solid fa-medal" style="color: orange;"></i>
+            {% endif %}
+            {{ forloop.counter }}番人気
+          </button>
+          {% include 'snippets/item_box.html' %}
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- 商品一覧 -->
+    <div class="row justify-content-center mt-5">
+      {% for object in items %}
+        <div class="col-6 col-md-3">
+          {% include 'snippets/item_box.html' %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock %}
