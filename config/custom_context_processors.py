@@ -6,6 +6,7 @@ def base(request):
     items = Item.objects.filter(is_published=True)
     return {
         'TITLE': settings.TITLE,
-        'ADDTIONAL_ITEMS': items,
+        'ADDITIONAL_ITEMS': items,
+        'items': items,  # ←これを追加
         'POPULAR_ITEMS': items.order_by('-sold_count')
     }
