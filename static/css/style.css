@@ -61,3 +61,8 @@
   display: block;
   margin: 0 auto;
 }
+
+.badge {
+  display: inline-block;
+  margin-bottom: 12px;  /* 強制的に余白追加 */
+}

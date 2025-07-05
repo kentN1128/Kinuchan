@@ -1,38 +1,43 @@
-<div class="border">
-  <img src="{{object.image.url}}" width="100%" class="bg-white" />
-  <div class="bg-light text-center text-secondary overflow-hidden">
-    <div class="my-2 py-2">
-      <h2 class="lead">{{object.name}} - ¥{{object.price}}</h2>
-      <form action="/cart/add/" method="POST" class="p-2">
-        {% csrf_token %}
-        <input type="hidden" name="item_pk" value="{{object.pk}}" />
-        <div class="form-row align-items-center">
-          <div class="col-md-7">
-            <input
-              type="number"
-              class="form-control form-control-sm"
-              name="quantity"
-              value="1"
-              max="{{object.stock}}"
-            />
-          </div>
-          <div class="col-md-5">
-            {% if object.stock == 0 %}
-            <button
-              type="submit"
-              class="btn btn-sm btn-outline-warning"
-              disabled
-            >
-              売り切れ
-            </button>
-            {% else %}
-            <button type="submit" class="btn btn-sm btn-outline-success">
-              Add to cart
-            </button>
-            {% endif %}
-          </div>
-        </div>
-      </form>
-    </div>
+<div class="card shadow-sm border-light text-center h-100" style="border-radius: 12px; overflow: hidden;">
+  
+  <!-- 商品画像 -->
+  <div class="p-3">
+    <img src="{{ object.image.url }}"
+         alt="{{ object.name }}"
+         class="card-img-top mx-auto d-block bg-white"
+         style="height: 160px; object-fit: contain;" />
+  </div>
+
+  <!-- 商品情報とカートボタン -->
+  <div class="card-body px-3 py-2 bg-white">
+    <h5 class="fw-bold mb-2" style="font-size: 1rem;">{{ object.name }}</h5>
+    <p class="text-muted mb-3" style="font-size: 0.9rem;">¥{{ object.price }}（税別）</p>
+
+    <form action="/cart/add/" method="POST" class="row g-2 justify-content-center">
+      {% csrf_token %}
+      <input type="hidden" name="item_pk" value="{{ object.pk }}" />
+      
+      <div class="col-5">
+        <input type="number"
+               name="quantity"
+               class="form-control form-control-sm text-center"
+               value="1"
+               max="{{ object.stock }}"
+               min="1"
+               style="min-width: 60px;" />
+      </div>
+
+      <div class="col-7">
+        {% if object.stock == 0 %}
+          <button type="submit" class="btn btn-sm btn-outline-warning w-100" disabled>
+            売り切れ
+          </button>
+        {% else %}
+          <button type="submit" class="btn btn-sm btn-outline-success w-100">
+            Add to cart
+          </button>
+        {% endif %}
+      </div>
+    </form>
   </div>
 </div>
