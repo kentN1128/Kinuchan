@@ -29,9 +29,10 @@
 
       <div class="col-7">
         {% if object.stock == 0 %}
-          <button type="submit" class="btn btn-sm btn-outline-warning w-100" disabled>
-            売り切れ
-          </button>
+          <div class="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
+           style="background-color: rgba(255, 255, 255, 0.7);">
+            <span class="sold-out-label fw-bold text-danger" style="font-size: 1.2rem;">SOLD OUT</span>
+          </div>
         {% else %}
           <button type="submit" class="btn btn-sm btn-outline-success w-100">
             Add to cart
