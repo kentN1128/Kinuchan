@@ -35,7 +35,13 @@
         {% include 'snippets/footer.html' %}
         {% endblock %}
     </footer>
-
+<script>
+  const myCarousel = document.querySelector('#carouselExampleDark');
+  const carousel = new bootstrap.Carousel(myCarousel, {
+    interval: 3000,     // 3秒ごとに切り替え
+    ride: 'carousel'    // 自動再生
+  });
+</script>
 </body>
 
 </html>
