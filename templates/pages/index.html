@@ -9,7 +9,7 @@
 <h5 class="section-title animate-slidein text-center mb-4">おすすめラインナップ</h5>
   {% for object in POPULAR_ITEMS %}
     {% if forloop.counter == 1 or forloop.counter == 2 or forloop.counter == 3 %}
-    <div class="col-12 col-lg-4 my-3">
+    <div class="col-4 col-lg-4 my-3">
       <button type="button" class="badge bg-danger rounded-pill">
         {% if forloop.counter == 1 %}<i class="fa-solid fa-crown text-warning"></i>
         {% elif forloop.counter == 2 %}<i class="fa-solid fa-medal text-secondary"></i>
@@ -24,9 +24,9 @@
 </div>
   <div class="row my-5">
   {% for object in object_list %}
-    <div class="col-12 col-lg-3 my-3">
-    {% include 'snippets/item_box.html' %}
-     </div>
+    <div class="col-6 col-md-4 col-lg-3 my-3">
+      {% include 'snippets/item_box.html' %}
+    </div>
   {% endfor %}
 </div>
 {% endblock %}
