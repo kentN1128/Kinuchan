@@ -1,19 +1,21 @@
-<a href="/items/{{object.pk}}/" class="text-decoration-none text-dark">
-  <div class="card border-light shadow-sm mb-4 text-center" style="border-radius: 12px;">
+<a href="/items/{{object.pk}}/" class="text-decoration-none text-dark h-100 d-block">
+  <div class="card border-light shadow-sm h-100 text-center" style="border-radius: 12px;">
     
-    <div class="position-relative p-3">
-      <img src="{{ object.image.url }}" class="card-img-top" style="object-fit: contain; height: 180px;" alt="{{ object.name }}">
-      
-      {% if object.stock == 0 %}
-      <div class="overlay d-flex justify-content-center align-items-center"
-           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-                  background: rgba(255,255,255,0.7); border-radius: 12px;">
-        <span class="sold-out-label fw-bold text-danger" style="font-size: 1.2rem;">SOLD OUT</span>
-      </div>
-      {% endif %}
+    <div class="p-3">
+      <img src="{{ object.image.url }}" 
+           class="card-img-top mx-auto d-block" 
+           style="height: 160px; object-fit: contain; width: auto;" 
+           alt="{{ object.name }}">
     </div>
 
-    <div class="card-body px-2 py-3" style="background-color: #fff;">
+    {% if object.stock == 0 %}
+    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center" 
+         style="background-color: rgba(255, 255, 255, 0.7); border-radius: 12px;">
+      <span class="sold-out-label fw-bold text-danger" style="font-size: 1.2rem;">SOLD OUT</span>
+    </div>
+    {% endif %}
+
+    <div class="card-body px-2 py-3 bg-white">
       <p class="fw-bold mb-1" style="font-size: 1rem;">{{ object.name }}</p>
       <p class="text-muted mb-0" style="font-size: 0.9rem;">¥{{ object.price }}（税別）</p>
     </div>
