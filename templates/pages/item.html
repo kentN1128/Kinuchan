@@ -20,7 +20,7 @@
 </div>
     <div class="col-12 col-lg-6">
       <div class="border p-3 text-left text-dark overflow-hidden">
-        <h2 class="display-5">{{object.name}}</h2>
+        <h2 class="responsive-title display-5">{{object.name}}</h2>
         <p class="lead">
           <a href="/categories/{{object.category.slug}}/"
             class="badge rounded-pill bg-info text-dark me-1 text-decoration-none">{{object.category.name}}</a>
@@ -49,7 +49,7 @@
       </div>
     </div>
   </div>
-  <h2>おすすめ</h2>
+  <h2 class="responsive-title">おすすめ</h2>
   <div class="row mb-5">
     {% for object in ADDTIONAL_ITEMS %}
     <div class="col-12 col-lg-3 my-3">
