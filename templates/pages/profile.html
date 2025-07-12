@@ -1,51 +1,71 @@
 {% extends 'base.html' %}
- 
+
 {% block main %}
- 
-<div class="container my-5">
-  <div class="row">
-    <div class="col-12">
-      <h1>Profile</h1>
-      <form method="POST">
-        {% csrf_token %}
-        <div class="form-group ">
-          <label>Name</label>
-          <input class="form-control" type="text" name="name" placeholder="name" value="{{user.profile.name}}">
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <div class="card shadow-sm border-light rounded-4">
+        <div class="card-body p-4">
+          <h2 class="mb-4 text-center fw-bold">プロフィール編集</h2>
+
+          <form method="POST">
+            {% csrf_token %}
+
+            <!-- Name -->
+            <div class="mb-3">
+              <label class="form-label">お名前</label>
+              <input type="text" name="name" value="{{ user.profile.name }}"
+                     class="form-control rounded-pill" placeholder="例：山田 太郎">
+            </div>
+
+            <!-- 郵便番号・都道府県・市区町村 -->
+            <div class="row mb-3">
+              <div class="col-md-3 mb-2">
+                <label class="form-label">郵便番号</label>
+                <input type="text" name="zipcode" value="{{ user.profile.zipcode }}"
+                       class="form-control rounded-pill" placeholder="123-4567">
+              </div>
+              <div class="col-md-4 mb-2">
+                <label class="form-label">都道府県</label>
+                <input type="text" name="prefecture" value="{{ user.profile.prefecture }}"
+                       class="form-control rounded-pill" placeholder="東京都">
+              </div>
+              <div class="col-md-5 mb-2">
+                <label class="form-label">市区町村</label>
+                <input type="text" name="city" value="{{ user.profile.city }}"
+                       class="form-control rounded-pill" placeholder="千代田区永田町">
+              </div>
+            </div>
+
+            <!-- 住所 -->
+            <div class="mb-3">
+              <label class="form-label">番地・建物名</label>
+              <input type="text" name="address1" value="{{ user.profile.address1 }}"
+                     class="form-control rounded-pill" placeholder="1-2-3 グリーンハイツ101">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">住所補足</label>
+              <input type="text" name="address2" value="{{ user.profile.address2 }}"
+                     class="form-control rounded-pill" placeholder="○○マンション203 など">
+            </div>
+
+            <!-- 電話番号 -->
+            <div class="mb-4">
+              <label class="form-label">電話番号</label>
+              <input type="tel" name="tel" value="{{ user.profile.tel }}"
+                     class="form-control rounded-pill" placeholder="090-1234-5678">
+            </div>
+
+            <!-- 保存ボタン -->
+            <div class="text-center">
+              <button type="submit" class="btn btn-success px-4 py-2 rounded-pill shadow-sm">保存する</button>
+            </div>
+
+          </form>
         </div>
-        <div class="form-row">
-          <div class="form-group col-md-2">
-            <label>Zip</label>
-            <input class="form-control" type="text" name="zipcode" placeholder="zipcode"
-              value="{{user.profile.zipcode}}">
-          </div>
-          <div class="form-group col-md-4">
-            <label>Prefecture</label>
-            <input class="form-control" type="text" name="prefecture" placeholder="prefecture"
-              value="{{user.profile.prefecture}}">
-          </div>
-          <div class="form-group col-md-6">
-            <label>City</label>
-            <input class="form-control" type="text" name="city" placeholder="city" value="{{user.profile.city}}">
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Address 1</label>
-          <input class="form-control" type="text" name="address1" placeholder="address1"
-            value="{{user.profile.address1}}">
-        </div>
-        <div class="form-group">
-          <label>Address 2</label>
-          <input class="form-control" type="text" name="address2" placeholder="address2"
-            value="{{user.profile.address2}}">
-        </div>
-        <div class="form-group">
-          <label>Tel</label>
-          <input class="form-control" type="tel" name="tel" placeholder="tel" value="{{user.profile.tel}}">
-        </div>
-        <button type="submit" class="btn btn-primary">Save</button>
-      </form>
+      </div>
     </div>
   </div>
 </div>
- 
 {% endblock %}

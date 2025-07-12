@@ -1,72 +1,84 @@
 {% extends 'base.html' %}
- 
+
 {% block main %}
- 
-<div class="container ">
-  <div class="row my-5">
-    <div class="col-12">
-      <h2>カート</h2>
-      {% if object_list|length != 0 %}
-      <table class="table mb-5 text-right">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">品名</th>
-            <th scope="col">単価</th>
-            <th scope="col">個数</th>
-            <th scope="col">計</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for object in object_list %}
-          <tr>
-            <td>No.{{forloop.counter}}</td>
-            <td>{{object.name}}</td>
-            <td>{{object.price}}</td>
-            <td>{{object.quantity}}</td>
-            <td>{{object.subtotal}}</td>
-            <td><a href="/cart/remove/{{object.pk}}/" class="my-auto btn btn-danger btn-sm">削除</a></td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      <p class="lead text-right">小計 - ¥{{total}}</p>
-      <p class="lead text-right">税込計 - ¥{{tax_included_total}}</p>
- 
-      <!-- Checkoutボタン -->
-      <form action="/pay/checkout/" method="POST" class="text-right">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-info">Checkout</button>
-      </form>
- 
-      {% else %}
-      <p class="">ショッピングカートにアイテムがありません。</p>
-      {% endif %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10">
+      <div class="card shadow-sm border-light rounded-4">
+        <div class="card-body p-4">
+
+          <h2 class="fw-bold mb-4 text-center">🛒 カート</h2>
+
+          {% if object_list|length != 0 %}
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle text-center">
+              <thead class="table-light">
+                <tr>
+                  <th>#</th>
+                  <th>品名</th>
+                  <th>単価</th>
+                  <th>個数</th>
+                  <th>小計</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for object in object_list %}
+                <tr>
+                  <td>No.{{ forloop.counter }}</td>
+                  <td>{{ object.name }}</td>
+                  <td>¥{{ object.price }}</td>
+                  <td>{{ object.quantity }}</td>
+                  <td>¥{{ object.subtotal }}</td>
+                  <td>
+                    <a href="/cart/remove/{{ object.pk }}/" class="btn btn-sm btn-outline-danger">削除</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 合計金額 -->
+          <div class="text-end my-4">
+            <p class="fs-5">小計：<span class="fw-bold">¥{{ total }}</span></p>
+            <p class="fs-5">税込合計：<span class="fw-bold text-success">¥{{ tax_included_total }}</span></p>
+          </div>
+
+          <!-- Checkoutボタン -->
+          <form action="/pay/checkout/" method="POST" class="text-end">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success px-4 py-2 rounded-pill shadow-sm">レジに進む</button>
+          </form>
+
+          {% else %}
+          <p class="text-center fs-5">🛍 ショッピングカートに商品がありません。</p>
+          {% endif %}
+
+        </div>
+      </div>
     </div>
   </div>
- 
-  <h2>おすすめ</h2>
-  <div class="row mb-5">
-    {% for object in ADDTIONAL_ITEMS %}
-    <div class="col-12 col-lg-3 my-3">
-      {% include 'snippets/item_add_box.html' %}
+
+  <!-- おすすめアイテム -->
+  <div class="mt-5">
+    <h3 class="mb-3 fw-bold text-center">🔍 あなたへのおすすめ</h3>
+    <div class="row">
+      {% for object in ADDITIONAL_ITEMS %}
+      <div class="col-6 col-md-4 col-lg-3 my-2">
+        {% include 'snippets/item_add_box.html' %}
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
   </div>
- 
 </div>
-<!-- ブラウザバックへの対応 -->
+
+<!-- ブラウザバック対応 -->
 <script>
-  document.addEventListener(
-    "visibilitychange",
-    () => {
-      if (document.visibilityState === "visible") {
-        window.location = "/pay/cancel/";
-      }
-    },
-    false
-  );
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+      window.location = "/pay/cancel/";
+    }
+  }, false);
 </script>
- 
 {% endblock %}
