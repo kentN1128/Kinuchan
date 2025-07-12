@@ -1,28 +1,45 @@
 {% extends 'base.html' %}
- 
+
 {% block main %}
-<div class="container my-5">
-  <div class="row">
-    <div class="col-12">
-      <h1>Orders</h1>
-      <table class="table table-striped ">
-        <thead>
-          <tr>
-            <th scope="col">No.</th>
-            <th scope="col">Created at</th>
-            <th scope="col">Tax included</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for object in object_list %}
-          <tr>
-            <td><a href="/orders/{{object.pk}}/">{{object.pk}}</a></td>
-            <td>{{object.created_at|date:"Y-m-d f"}}</td>
-            <td>¥{{object.tax_included}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+<div class="container my-5 px-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10">
+
+      <!-- タイトル -->
+      <h1 class="mb-4 text-center display-5">注文履歴</h1>
+
+      <!-- 注文テーブル -->
+      <div class="table-responsive">
+        <table class="table table-hover align-middle bg-white shadow-sm rounded">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">注文番号</th>
+              <th scope="col">注文日時</th>
+              <th scope="col">合計金額（税込）</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for object in object_list %}
+            <tr>
+              <td>
+                <a href="/orders/{{object.pk}}/" class="text-decoration-none fw-bold">
+                  #{{ object.pk }}
+                </a>
+              </td>
+              <td>{{ object.created_at|date:"Y年n月j日 G:i" }}</td>
+              <td>¥{{ object.tax_included|intcomma }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="3" class="text-center text-muted py-4">
+                注文履歴がまだありません。
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </div>
 </div>

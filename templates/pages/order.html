@@ -1,112 +1,75 @@
 {% extends 'base.html' %}
- 
+
 {% block main %}
- 
-<div class="container my-5">
-  <div class="row">
-    <div class="col-12">
-      <h1>Order</h1>
-      <h2 class="my-4">注文情報</h2>
-      <table class="table mb-5">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-          </tr>
-        </thead>
+<div class="container my-5 px-3 px-md-4">
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10">
+
+      <!-- タイトル -->
+      <h1 class="mb-4 text-center display-5">注文詳細</h1>
+
+      <!-- 注文情報 -->
+      <h3 class="mb-3">注文情報</h3>
+      <table class="table table-bordered table-striped mb-5">
         <tbody>
-          <tr>
-            <th scope="row">No.</th>
-            <td>{{object.pk}}</td>
-          </tr>
-          <tr>
-            <th scope="row">金額</th>
-            <td>{{object.amount}}</td>
-          </tr>
-          <tr>
-            <th scope="row">税込</th>
-            <td>{{object.tax_included}}</td>
-          </tr>
- 
-          <tr>
-            <th scope="row">注文確定日</th>
-            <td>{{object.created_at|date:"Y-m-d f"}}</td>
-          </tr>
-          <tr>
-            <th scope="row">UID</th>
-            <td>{{object.uid}}</td>
-          </tr>
-          <tr>
-            <th scope="row">郵便番号</th>
-            <td>{{shipping.0.fields.zipcode}}</td>
-          </tr>
-          <tr>
-            <th scope="row">都道府県</th>
-            <td>{{shipping.0.fields.prefecture}}</td>
-          </tr>
-          <tr>
-            <th scope="row">市区</th>
-            <td>{{shipping.0.fields.city}}</td>
-          </tr>
-          <tr>
-            <th scope="row">住所1</th>
-            <td>{{shipping.0.fields.address1}}</td>
-          </tr>
-          <tr>
-            <th scope="row">住所2</th>
-            <td>{{shipping.0.fields.address2}}</td>
-          </tr>
-          <tr>
-            <th scope="row">電話番号</th>
-            <td>{{shipping.0.fields.tel}}</td>
-          </tr>
+          <tr><th scope="row">注文番号</th><td>#{{ object.pk }}</td></tr>
+          <tr><th scope="row">金額</th><td>¥{{ object.amount|intcomma }}</td></tr>
+          <tr><th scope="row">税込</th><td>¥{{ object.tax_included|intcomma }}</td></tr>
+          <tr><th scope="row">注文確定日</th><td>{{ object.created_at|date:"Y年n月j日 G:i" }}</td></tr>
+          <tr><th scope="row">UID</th><td>{{ object.uid }}</td></tr>
+          <tr><th scope="row">郵便番号</th><td>{{ shipping.0.fields.zipcode }}</td></tr>
+          <tr><th scope="row">都道府県</th><td>{{ shipping.0.fields.prefecture }}</td></tr>
+          <tr><th scope="row">市区</th><td>{{ shipping.0.fields.city }}</td></tr>
+          <tr><th scope="row">住所1</th><td>{{ shipping.0.fields.address1 }}</td></tr>
+          <tr><th scope="row">住所2</th><td>{{ shipping.0.fields.address2 }}</td></tr>
+          <tr><th scope="row">電話番号</th><td>{{ shipping.0.fields.tel }}</td></tr>
         </tbody>
       </table>
- 
- 
-      <h2 class="my-4">注文状況</h2>
-      <div>
+
+      <!-- 注文ステータス -->
+      <h3 class="mb-3">注文状況</h3>
+      <div class="mb-5">
         {% if object.shipped_at %}
-        <div class="my-3 ">
-          <button class="btn btn-primary" disabled>発送済み: {{object.shipped_at}}</button>
-        </div>
+          <p><span class="badge bg-primary">発送済み：{{ object.shipped_at|date:"Y年n月j日 G:i" }}</span></p>
         {% else %}
-        <div class="my-3 ">
-          <button class="btn btn-secondary" disabled>未発送</button>
-        </div>
+          <p><span class="badge bg-secondary">未発送</span></p>
         {% endif %}
         {% if object.canceled_at %}
-        <div class="my-3 ">
-          <button class="btn btn-danger" disabled>キャンセル済み: {{object.canceled_at}}</button>
-        </div>
+          <p><span class="badge bg-danger">キャンセル済み：{{ object.canceled_at|date:"Y年n月j日 G:i" }}</span></p>
         {% endif %}
       </div>
- 
-      <h2 class="my-4">注文アイテム一覧</h2>
-      <table class="table mb-5">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">画像</th>
-            <th scope="col">品名</th>
-            <th scope="col">単価</th>
-            <th scope="col">数量</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for item in items %}
-          <tr>
-            <th scope="row">{{ forloop.counter }}</th>
-            <td><img src="/{{item.image}}" width="auto" height="100px"></td>
-            <td>{{ item.name }}</td>
-            <td>¥{{item.price}}</td>
-            <td>{{item.quantity}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+
+      <!-- アイテム一覧 -->
+      <h3 class="mb-3">注文アイテム一覧</h3>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>#</th>
+              <th>画像</th>
+              <th>品名</th>
+              <th>単価</th>
+              <th>数量</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in items %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td><img src="/{{ item.image }}" alt="{{ item.name }}" style="height: 80px; object-fit: contain;"></td>
+              <td>{{ item.name }}</td>
+              <td>¥{{ item.price|intcomma }}</td>
+              <td>{{ item.quantity }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" class="text-center text-muted py-3">注文された商品がありません。</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </div>
 </div>
- 
 {% endblock %}
